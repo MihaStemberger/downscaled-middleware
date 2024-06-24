@@ -28,6 +28,14 @@
             <artifactId>quarkus-quinoa</artifactId>
             <version>2.3.10</version>
         </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-openapi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-rest-jackson</artifactId>
+        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>io.quarkiverse.web-bundler</groupId>-->
 <!--            <artifactId>quarkus-web-bundler</artifactId>-->

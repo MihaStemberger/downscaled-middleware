@@ -1,5 +1,8 @@
 import { BaseChartDirective } from 'ng2-charts';
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api/services/api.service'; // Update the path accordingly
+import * as Models from '../api/models'; // Single import for all models
+
 
 @Component({
 selector: 'app-scale-chart',
@@ -8,8 +11,29 @@ styleUrl: './scale-chart.component.css',
   standalone: true,
   imports: [BaseChartDirective],
 })
-export class ScaleChartComponent {
+export class ScaleChartComponent implements OnInit {
 
+constructor(private apiService: ApiService) {}
+
+ngOnInit(): void {
+    const from = new Date('2021-01-01T00:00:00Z').toISOString();
+    const to = new Date('2024-12-31T23:59:59Z').toISOString();
+
+    this.apiService.scaleDataGet().subscribe(
+      (data: Models.ScaleDataDto[]) => {
+        const weights = data.map(item => item.weight);
+        const timestamps = data.map(item => item.insertDate);
+
+//         this.lineChartData[0].data = weights;
+//         this.lineChartLabels = timestamps.map(timestamp => new Date(timestamp).toLocaleDateString());
+
+        console.log('Scale data loaded', data);
+      },
+      error => {
+        console.error('Error loading scale data', error);
+      }
+    );
+  }
 
   global: boolean = false;
   country!: string;

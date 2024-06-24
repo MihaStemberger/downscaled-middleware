@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppComponent } from './app.component';
 import { ScaleChartComponent } from './scale-chart/scale-chart.component';
-import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { ApiModule } from './api/api.module';
 
 @NgModule({
   imports: [
@@ -14,7 +16,7 @@ import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
     AppComponent,
     ScaleChartComponent
   ],
-  providers: [provideCharts(withDefaultRegisterables())],
+  imports: [HttpClientModule, ApiModule],
   exports: [ AppComponent ],
   bootstrap: [ AppComponent ]
 })
