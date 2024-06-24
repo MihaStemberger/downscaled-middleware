@@ -21,7 +21,7 @@ public class ScaleDataRepository {
     }
 
     public List<ScaleData> findByInsertDateRange(Instant from, Instant to) {
-        return em.createQuery("SELECT s FROM ScaleData s WHERE s.insertDate BETWEEN :from AND :to", ScaleData.class)
+        return em.createQuery("SELECT s FROM ScaleData s WHERE s.insertDate BETWEEN :from AND :to ORDER BY s.insertDate ASC", ScaleData.class)
                 .setParameter("from", from)
                 .setParameter("to", to)
                 .getResultList();

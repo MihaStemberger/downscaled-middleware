@@ -2,6 +2,7 @@ import { BaseChartDirective } from 'ng2-charts';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api/services/api.service'; // Update the path accordingly
 import * as Models from '../api/models'; // Single import for all models
+import { ScaleDataByTimestampRangeGet$Params } from '..//api/fn/operations/scale-data-by-timestamp-range-get';
 
 
 @Component({
@@ -16,10 +17,13 @@ export class ScaleChartComponent implements OnInit {
 constructor(private apiService: ApiService) {}
 
 ngOnInit(): void {
-    const from = new Date('2021-01-01T00:00:00Z').toISOString();
-    const to = new Date('2024-12-31T23:59:59Z').toISOString();
+      const from: Models.Instant = new Date('2024-01-01T00:00:00Z').toISOString();
+      const to: Models.Instant = new Date('2024-07-01T23:59:59Z').toISOString();
 
-    this.apiService.scaleDataGet().subscribe(
+      const params: ScaleDataByTimestampRangeGet$Params = { from, to };
+
+
+    this.apiService.scaleDataByTimestampRangeGet(params).subscribe(
       (data: Models.ScaleDataDto[]) => {
         const weights = data.map(item => item.weight);
         const timestamps = data.map(item => item.insertDate);
