@@ -24,9 +24,11 @@ ngOnInit(): void {
         const weights = data.map(item => item.weight);
         const timestamps = data.map(item => item.insertDate);
 
-//         this.lineChartData[0].data = weights;
-//         this.lineChartLabels = timestamps.map(timestamp => new Date(timestamp).toLocaleDateString());
 
+// console.log(weights);
+// console.log(timestamps);
+        this.lineChartData[0].data = weights;
+        this.lineChartLabels = timestamps;
         console.log('Scale data loaded', data);
       },
       error => {
