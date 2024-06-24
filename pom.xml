@@ -10,6 +10,7 @@
     <modules>
         <module>app-libs</module>
         <module>app</module>
+        <module>app-frontend</module>
     </modules>
 
     <properties>
@@ -125,6 +126,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

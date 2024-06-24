@@ -80,3 +80,7 @@ nb-configuration.xml
 
 # Plugin directory
 /.quarkus/cli/plugins/
+
+node_modules
+package-lock.json
+.quinoa
