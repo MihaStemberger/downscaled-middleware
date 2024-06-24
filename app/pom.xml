@@ -90,11 +90,11 @@
                             <followSymlinks>false</followSymlinks>
                             <useDefaultExcludes>true</useDefaultExcludes>
                         </fileset>
-                        <fileset>
-                            <directory>.quinoa</directory>
-                            <followSymlinks>false</followSymlinks>
-                            <useDefaultExcludes>true</useDefaultExcludes>
-                        </fileset>
+<!--                        <fileset>-->
+<!--                            <directory>.quinoa</directory>-->
+<!--                            <followSymlinks>false</followSymlinks>-->
+<!--                            <useDefaultExcludes>true</useDefaultExcludes>-->
+<!--                        </fileset>-->
                     </filesets>
                 </configuration>
             </plugin>
