@@ -1,6 +1,8 @@
 package com.stemberger.miha.downscaled.rest.repositories;
 
-import com.stemberger.miha.downscaled.entities.ScaleData;
+import com.stemberger.miha.downscaled.entities.scale.ScaleData;
+import com.stemberger.miha.downscaled.entities.sql.Order;
+import com.stemberger.miha.downscaled.rest.api.dtos.MinMaxInsertDateDto;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -11,20 +13,24 @@ import java.util.List;
 @ApplicationScoped
 public class ScaleDataRepository {
 
-//    TODO: see to this
     @PersistenceContext
     private EntityManager em;
 
-//    TODO create named queries for these
-    public List<ScaleData> listAll() {
-        return em.createQuery("SELECT s FROM ScaleData s", ScaleData.class).getResultList();
+    public List<ScaleData> getAll() {
+        return em.createNamedQuery(ScaleData.GET_ALL, ScaleData.class).getResultList();
     }
 
-    public List<ScaleData> findByInsertDateRange(Instant from, Instant to) {
-        return em.createQuery("SELECT s FROM ScaleData s WHERE s.insertDate BETWEEN :from AND :to ORDER BY s.insertDate ASC", ScaleData.class)
+    public List<ScaleData> getInDateRange(final Instant from,
+                                          final Instant to) {
+        return em.createNamedQuery(ScaleData.GET_IN_INSERT_DATE_RANGE, ScaleData.class)
                 .setParameter("from", from)
                 .setParameter("to", to)
                 .getResultList();
+    }
+
+    public MinMaxInsertDateDto getMinAndMaxInsertDate() {
+        return em.createNamedQuery(ScaleData.GET_MIN_AND_MAX_INSERT_DATE, MinMaxInsertDateDto.class)
+                .getSingleResult();
     }
 
 }

@@ -1,6 +1,6 @@
 package com.stemberger.miha.downscaled.rest.api.mappers;
 
-import com.stemberger.miha.downscaled.entities.ScaleData;
+import com.stemberger.miha.downscaled.entities.scale.ScaleData;
 import com.stemberger.miha.downscaled.rest.api.dtos.ScaleDataDto;
 
 public class ScaleDataMapper {

@@ -1,13 +1,11 @@
-package com.stemberger.miha.downscaled.entities;
+package com.stemberger.miha.downscaled.entities.scale;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
 import java.util.UUID;
+
 
 @Getter
 @Setter
@@ -16,7 +14,16 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "scale_data")
+@NamedQueries({
+        @NamedQuery(name = ScaleData.GET_ALL, query = ScaleDataQueryStrings.SELECT_ALL),
+        @NamedQuery(name = ScaleData.GET_IN_INSERT_DATE_RANGE, query = ScaleDataQueryStrings.SELECT_IN_INSERT_DATE_RANGE),
+        @NamedQuery(name = ScaleData.GET_MIN_AND_MAX_INSERT_DATE, query = ScaleDataQueryStrings.SELECT_MIN_MAX_INSERT_DATE)
+})
 public class ScaleData {
+
+    public static final String GET_ALL = "scaleDataAll";
+    public static final String GET_IN_INSERT_DATE_RANGE = "scaleDataInInsertDateRange";
+    public static final String GET_MIN_AND_MAX_INSERT_DATE = "scaleDataMinMaxInsertDate";
 
     @Id
     private UUID id;

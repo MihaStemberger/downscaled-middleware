@@ -2,7 +2,7 @@ import { BaseChartDirective } from 'ng2-charts';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api/services/api.service'; // Update the path accordingly
 import * as Models from '../api/models'; // Single import for all models
-import { ScaleDataByTimestampRangeGet$Params } from '..//api/fn/operations/scale-data-by-timestamp-range-get';
+import { ScaleDataByInsertDateRangeGet$Params } from '../api/fn/operations/scale-data-by-insert-date-range-get';
 
 
 @Component({
@@ -20,10 +20,10 @@ ngOnInit(): void {
       const from: Models.Instant = new Date('2024-01-01T00:00:00Z').toISOString();
       const to: Models.Instant = new Date('2024-07-01T23:59:59Z').toISOString();
 
-      const params: ScaleDataByTimestampRangeGet$Params = { from, to };
+      const params: ScaleDataByInsertDateRangeGet$Params = { from, to };
 
 
-    this.apiService.scaleDataByTimestampRangeGet(params).subscribe(
+    this.apiService.scaleDataByInsertDateRangeGet(params).subscribe(
       (data: Models.ScaleDataDto[]) => {
         const weights = data.map(item => item.weight);
         const timestamps = data.map(item => item.insertDate);
@@ -39,6 +39,16 @@ ngOnInit(): void {
         console.error('Error loading scale data', error);
       }
     );
+
+    this.apiService.scaleDataMinMaxSearchParamsGet().subscribe(
+          (data: Models.MinMaxInsertDateDto) => {
+            console.log('min-max data loaded', data);
+          },
+          error => {
+            console.error('Error loading min-max data', error);
+          }
+        );
+
   }
 
   global: boolean = false;

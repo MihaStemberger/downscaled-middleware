@@ -9,13 +9,13 @@ import { RequestBuilder } from '../../request-builder';
 import { Instant } from '../../models/instant';
 import { ScaleDataDto } from '../../models/scale-data-dto';
 
-export interface ScaleDataByTimestampRangeGet$Params {
-  from?: Instant;
-  to?: Instant;
+export interface ScaleDataByInsertDateRangeGet$Params {
+  from: Instant;
+  to: Instant;
 }
 
-export function scaleDataByTimestampRangeGet(http: HttpClient, rootUrl: string, params?: ScaleDataByTimestampRangeGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ScaleDataDto>>> {
-  const rb = new RequestBuilder(rootUrl, scaleDataByTimestampRangeGet.PATH, 'get');
+export function scaleDataByInsertDateRangeGet(http: HttpClient, rootUrl: string, params: ScaleDataByInsertDateRangeGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ScaleDataDto>>> {
+  const rb = new RequestBuilder(rootUrl, scaleDataByInsertDateRangeGet.PATH, 'get');
   if (params) {
     rb.query('from', params.from, {});
     rb.query('to', params.to, {});
@@ -31,4 +31,4 @@ export function scaleDataByTimestampRangeGet(http: HttpClient, rootUrl: string, 
   );
 }
 
-scaleDataByTimestampRangeGet.PATH = '/scale_data/by-timestamp-range';
+scaleDataByInsertDateRangeGet.PATH = '/scale_data/by-insert-date-range';

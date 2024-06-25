@@ -1,5 +1,8 @@
 package com.stemberger.miha.downscaled.rest.api.dtos;
 
+import com.stemberger.miha.downscaled.rest.api.validation.groups.ScaleDataValidationGroups;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -13,10 +16,14 @@ import java.util.UUID;
 @ToString
 public class ScaleDataDto {
 
+    @Null(groups= ScaleDataValidationGroups.Post.class)
+    @NotNull(groups= ScaleDataValidationGroups.Put.class)
     private UUID id;
     private Double weight;
     private Double bmi;
     private Double height;
+    @Null(groups= ScaleDataValidationGroups.Post.class)
+    @NotNull(groups= ScaleDataValidationGroups.Put.class)
     private Instant insertDate;
     private Double bodyFatPercentage;
     private Double basalMetabolism;

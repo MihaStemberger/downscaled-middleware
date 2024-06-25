@@ -9,10 +9,11 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { MinMaxInsertDateDto } from '../models/min-max-insert-date-dto';
 import { scaleDataAddPost } from '../fn/operations/scale-data-add-post';
 import { ScaleDataAddPost$Params } from '../fn/operations/scale-data-add-post';
-import { scaleDataByTimestampRangeGet } from '../fn/operations/scale-data-by-timestamp-range-get';
-import { ScaleDataByTimestampRangeGet$Params } from '../fn/operations/scale-data-by-timestamp-range-get';
+import { scaleDataByInsertDateRangeGet } from '../fn/operations/scale-data-by-insert-date-range-get';
+import { ScaleDataByInsertDateRangeGet$Params } from '../fn/operations/scale-data-by-insert-date-range-get';
 import { ScaleDataDto } from '../models/scale-data-dto';
 import { scaleDataGet } from '../fn/operations/scale-data-get';
 import { ScaleDataGet$Params } from '../fn/operations/scale-data-get';
@@ -22,6 +23,8 @@ import { scaleDataIdGet } from '../fn/operations/scale-data-id-get';
 import { ScaleDataIdGet$Params } from '../fn/operations/scale-data-id-get';
 import { scaleDataIdPut } from '../fn/operations/scale-data-id-put';
 import { ScaleDataIdPut$Params } from '../fn/operations/scale-data-id-put';
+import { scaleDataMinMaxSearchParamsGet } from '../fn/operations/scale-data-min-max-search-params-get';
+import { ScaleDataMinMaxSearchParamsGet$Params } from '../fn/operations/scale-data-min-max-search-params-get';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService extends BaseService {
@@ -79,28 +82,53 @@ export class ApiService extends BaseService {
     );
   }
 
-  /** Path part for operation `scaleDataByTimestampRangeGet()` */
-  static readonly ScaleDataByTimestampRangeGetPath = '/scale_data/by-timestamp-range';
+  /** Path part for operation `scaleDataByInsertDateRangeGet()` */
+  static readonly ScaleDataByInsertDateRangeGetPath = '/scale_data/by-insert-date-range';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `scaleDataByTimestampRangeGet()` instead.
+   * To access only the response body, use `scaleDataByInsertDateRangeGet()` instead.
    *
    * This method doesn't expect any request body.
    */
-  scaleDataByTimestampRangeGet$Response(params?: ScaleDataByTimestampRangeGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ScaleDataDto>>> {
-    return scaleDataByTimestampRangeGet(this.http, this.rootUrl, params, context);
+  scaleDataByInsertDateRangeGet$Response(params: ScaleDataByInsertDateRangeGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ScaleDataDto>>> {
+    return scaleDataByInsertDateRangeGet(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `scaleDataByTimestampRangeGet$Response()` instead.
+   * To access the full response (for headers, for example), `scaleDataByInsertDateRangeGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  scaleDataByTimestampRangeGet(params?: ScaleDataByTimestampRangeGet$Params, context?: HttpContext): Observable<Array<ScaleDataDto>> {
-    return this.scaleDataByTimestampRangeGet$Response(params, context).pipe(
+  scaleDataByInsertDateRangeGet(params: ScaleDataByInsertDateRangeGet$Params, context?: HttpContext): Observable<Array<ScaleDataDto>> {
+    return this.scaleDataByInsertDateRangeGet$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<ScaleDataDto>>): Array<ScaleDataDto> => r.body)
+    );
+  }
+
+  /** Path part for operation `scaleDataMinMaxSearchParamsGet()` */
+  static readonly ScaleDataMinMaxSearchParamsGetPath = '/scale_data/min-max-search-params';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `scaleDataMinMaxSearchParamsGet()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  scaleDataMinMaxSearchParamsGet$Response(params?: ScaleDataMinMaxSearchParamsGet$Params, context?: HttpContext): Observable<StrictHttpResponse<MinMaxInsertDateDto>> {
+    return scaleDataMinMaxSearchParamsGet(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `scaleDataMinMaxSearchParamsGet$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  scaleDataMinMaxSearchParamsGet(params?: ScaleDataMinMaxSearchParamsGet$Params, context?: HttpContext): Observable<MinMaxInsertDateDto> {
+    return this.scaleDataMinMaxSearchParamsGet$Response(params, context).pipe(
+      map((r: StrictHttpResponse<MinMaxInsertDateDto>): MinMaxInsertDateDto => r.body)
     );
   }
 
